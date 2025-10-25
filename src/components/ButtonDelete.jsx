@@ -1,8 +1,11 @@
 import React from 'react';
 
-function ButtonDelete() {
+function ButtonDelete({onClick}) {
   return (
-    <button className="w-8 h-8 font-bold items-center duration-200 hover:bg-red-700 hover:rounded-full hover:shadow-xl">
+    <button 
+      onClick={onClick}
+      className="w-8 h-8 font-bold items-center duration-200 hover:bg-red-700 hover:rounded-full hover:shadow-xl"
+    >
       ✕
     </button>
   );

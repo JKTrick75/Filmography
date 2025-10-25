@@ -13,7 +13,7 @@ function Film({ pelicula, onDelete, onUpdate }) {
         />
         {/* Botón Delete */}
         <div className="absolute top-1 right-1">
-            <ButtonDelete />
+            <ButtonDelete onClick={() => onDelete(pelicula.id)} />
         </div>
       </div>
 
@@ -25,7 +25,7 @@ function Film({ pelicula, onDelete, onUpdate }) {
           {pelicula.year}
         </p>
         {/* Botón Update */}
-        <ButtonUpdate />
+        <ButtonUpdate onClick={() => onUpdate(pelicula.id)} />
       </div>
     </div>
   );
