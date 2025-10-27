@@ -91,7 +91,7 @@ function App() {
 	//===========================================================================//
 	//UPDATE
 	//===========================================================================//
-	//ABRIMOS MODAL
+	//ABRIMOS MODAL (es la que le pasamos al botón de Update de GridFilms)
 	const handleUpdateFilm = (peliID) => {
 		console.log("Actualizar película con ID:", peliID);
 
@@ -105,15 +105,39 @@ function App() {
 
 	};
 
-	//CERRAMOS MODAL
+	//CERRAMOS MODAL (es la que le pasamos al onClose del modal)
 	const handleCancelEdit = () => {
 		console.log("Cancelamos update peli");
 		//Cerramos el modal al ponerlo a null
 		setPeliculaAEditar(null);
 	};
 
-	//GUARDAMOS UPDATE PELI
-	
+	//GUARDAMOS UPDATE PELI (es la que le pasamos al onSave del modal)
+	const handleUpdateAPI = async (peliParaActualizar) => {
+		console.log("Enviamos actualización a la API:", peliParaActualizar);
+
+		try {
+			//Fetch api
+			const response = await fetch(`${API_URL}/${peliParaActualizar.id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(peliParaActualizar)
+			});
+			const peliActualizada = await response.json();
+
+			//Actualizamos el State de pelis para actualizar la peli
+			//Iteramos sobre listadoPelis, si encuentra la peli, la actualiza
+			setPeliculas(listadoPelis => listadoPelis.map(peli => peli.id === peliActualizada.id ? peliActualizada : peli));
+
+			// CERRAMOS EL MODAL después de guardar
+			setPeliculaAEditar(null);
+
+		} catch (error) {
+		console.error("Error al actualizar la película:", error);
+		}
+	};
 
 
 	//===========================================================================//
@@ -141,7 +165,7 @@ function App() {
 			{peliculaAEditar && (
 				<ModalEditFilm 
 					pelicula={peliculaAEditar}
-					// onSave={handleUpdateAPI} //EN OBRAS
+					onSave={handleUpdateAPI}
 					onClose={handleCancelEdit}
 				/>
 			)}
