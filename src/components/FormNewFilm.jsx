@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ButtonCreate from './ButtonCreate';
 import { useForm } from '../hooks/useForm';
 
-function FormNewFilm({onCreate}){
+function FormNewFilm({ onCreate }) {
     //Usamos un custom hook para el State del formulario (useForm.js)
     const [formData, handleChangeForm, resetForm, setFieldForm] = useForm({
         name: '',
@@ -13,8 +13,8 @@ function FormNewFilm({onCreate}){
     const handleSubmit = (e) => {
         //Evitamos que se recargue la página
         e.preventDefault();
-        
-        //Validación campos formulario
+
+        //Validamos campos formulario
         if (!formData.name || !formData.year || !formData.image) {
             alert('Por favor, completa todos los campos');
             return;
@@ -22,7 +22,7 @@ function FormNewFilm({onCreate}){
 
         //Llamamos a la función de crear película
         onCreate(formData);
-        
+
         //Limpiamos formulario
         resetForm();
     };
@@ -30,6 +30,7 @@ function FormNewFilm({onCreate}){
     return (
         <>
             <div className="max-w-6xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg ring-1 ring-gray-500 mt-8">
+                
                 <form onSubmit={handleSubmit}>
                     <div className='flex gap-8'>
                         <div className="flex-1 mb-4">
