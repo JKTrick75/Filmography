@@ -8,7 +8,7 @@ export function useForm(initialState) {
     //Detectar cambios del input y actualizamos el State y el value
     const handleChangeForm = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData(formData => ({ ...formData, [name]: value }));
     };
     
     //Resetear formulario
@@ -16,7 +16,7 @@ export function useForm(initialState) {
     
     //Cambiar el State y el value del campo seleccionado (es como un handleChange personalizado)
     const setFieldForm = (name, value) => {
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData(formData => ({ ...formData, [name]: value }));
     };
     
     return [formData, handleChangeForm, resetForm, setFieldForm];

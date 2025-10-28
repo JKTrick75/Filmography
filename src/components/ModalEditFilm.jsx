@@ -31,7 +31,7 @@ function ModalEditFilm({ pelicula, onSave, onClose }) {
             return;
         }
         
-        //Llamamos a la función de editar pelicula
+        //Llamamos a la función de editar pelicula (y le añadimos antes la id para que sepa cual es)
         onSave({ ...formData, id: pelicula.id });
     };
 

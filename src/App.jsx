@@ -5,7 +5,7 @@ import './index.css'
 //Importar componentes
 import Header from './components/Header'
 import FormNewFilm from './components/FormNewFilm' //Formulario Crear
-import ModalEditFilm from './components/FormEditFilm' //Formulario Editar (modal)
+import ModalEditFilm from './components/ModalEditFilm' //Formulario Editar (modal)
 import GridFilms from './components/GridFilms'
 
 //URL json-server
@@ -40,7 +40,7 @@ function App() {
 		};
 
 		fetchPeliculas();
-	}, []); //El [] significa que solo se ejecuta 1 vez al principio
+	}, []); //El [] significa que solo se ejecuta 1 vez al principio (cuando montamos el componente -> Mount)
 
 	//===========================================================================//
 	//CREATE
