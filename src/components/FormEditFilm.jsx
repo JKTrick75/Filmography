@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import ButtonSubmit from './ButtonSubmit';
+import ButtonCancel from './ButtonCancel';
 import { useForm } from '../hooks/useForm';
 
 function ModalEditFilm({ pelicula, onSave, onClose }) {
@@ -34,7 +36,7 @@ function ModalEditFilm({ pelicula, onSave, onClose }) {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-md flex items-center justify-center z-50">
 
             <div className="max-w-4xl w-full bg-gray-800 p-6 rounded-lg shadow-lg ring-1 ring-gray-500">
                 <h2 className="text-xl font-bold text-center mb-4 text-gray-300">
@@ -76,17 +78,15 @@ function ModalEditFilm({ pelicula, onSave, onClose }) {
                     </div>
 
                     <div className="flex justify-center gap-4">
-                        {/* Boton cancelar //EN OBRAS, CONVERTIRLO EN UN COMPONENTE */}
-                        <button type="button"
-                            onClick={onClose} //Llama a la función de cerrar modal
-                            className="bg-gray-600 hover:bg-gray-500 text-white font-medium py-2 px-4 rounded-md duration-200"
-                        >
-                            Cancelar
-                        </button>
-                        {/* Boton guardar //EN OBRAS, APROVECHAR BOTÓNCREATE QUE YA TENEMOS */}
-                        <button type="submit" className="bg-blue-800 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md duration-200">
+                        {/* Boton cancelar */}
+                        <ButtonCancel 
+                            onClick={onClose}
+                        />
+
+                        {/* Boton Submit */}
+                        <ButtonSubmit>
                             Guardar
-                        </button>
+                        </ButtonSubmit>
                     </div>
                 </form>
 

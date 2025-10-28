@@ -1,5 +1,5 @@
 import React from 'react'
-import ButtonCreate from './ButtonCreate';
+import ButtonSubmit from './ButtonSubmit';
 import { useForm } from '../hooks/useForm';
 
 function FormNewFilm({ onCreate }) {
@@ -65,8 +65,10 @@ function FormNewFilm({ onCreate }) {
                         />
                     </div>
                     <div className="flex justify-center">
-                        {/* Botón Create */}
-                        <ButtonCreate />
+                        {/* Botón Submit */}
+                        <ButtonSubmit>
+                            Crear
+                        </ButtonSubmit>
                     </div>
                 </form>
             </div>
