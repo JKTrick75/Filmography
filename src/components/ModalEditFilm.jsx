@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import ButtonSubmit from './ButtonSubmit';
 import ButtonCancel from './ButtonCancel';
+import SelectorGeneros from './SelectorGeneros';
 import { useForm } from '../hooks/useForm';
 
-function ModalEditFilm({ pelicula, onSave, onClose }) {
+function ModalEditFilm({ pelicula, onSave, onClose, listaGeneros }) {
     //Usamos un custom hook para el State del formulario (useForm.js)
-    const [formData, handleChangeForm, resetForm, setFieldForm] = useForm({
+    const [formData, handleChangeForm, resetForm, setFieldForm, handleToggleArrayField] = useForm({
         name: '',
         year: '',
-        image: ''
+        image: '',
+        generos: []
     });
 
     //Rellenamos el formulario cuando la 'pelicula' prop cambia
@@ -18,6 +20,7 @@ function ModalEditFilm({ pelicula, onSave, onClose }) {
             setFieldForm('name', pelicula.name);
             setFieldForm('year', pelicula.year);
             setFieldForm('image', pelicula.image);
+            setFieldForm('generos', pelicula.generos || []);
         }
     }, [pelicula]); //Se ejecuta cada vez que cambiamos de peli para editar
 
@@ -76,6 +79,12 @@ function ModalEditFilm({ pelicula, onSave, onClose }) {
                             className="w-full px-3 py-2 bg-gray-700 text-white rounded-md ring-1 ring-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
                         />
                     </div>
+
+                    <SelectorGeneros
+                        listaGeneros={listaGeneros}
+                        selectedGeneros={formData.generos}
+                        onToggle={(generoID) => handleToggleArrayField('generos', generoID)}
+                    />
 
                     <div className="flex justify-center gap-4">
                         {/* Boton cancelar */}

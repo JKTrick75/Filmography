@@ -18,6 +18,19 @@ export function useForm(initialState) {
     const setFieldForm = (name, value) => {
         setFormData(formData => ({ ...formData, [name]: value }));
     };
+
+    const handleToggleArrayField = (fieldName, valueToToggle) => {
+        //Recogemos el State del array actual (formData.generos)
+        const currentArray = formData[fieldName] || [];
+
+        //Hacemos el toggle
+        const newArray = currentArray.includes(valueToToggle)
+            ? currentArray.filter(item => item !== valueToToggle) //Lo quita
+            : [...currentArray, valueToToggle]; //Lo añade
+
+        //Guardamos el nuevo array en el State
+        setFieldForm(fieldName, newArray);
+    };
     
-    return [formData, handleChangeForm, resetForm, setFieldForm];
+    return [formData, handleChangeForm, resetForm, setFieldForm, handleToggleArrayField];
 }

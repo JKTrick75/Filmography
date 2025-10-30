@@ -3,7 +3,7 @@ import React from 'react';
 import ButtonDelete from './ButtonDelete';
 import ButtonUpdate from './ButtonUpdate';
 
-function Film({ pelicula, onDelete, onUpdate }) {
+function Film({ pelicula, onDeleteFilm, onUpdateFilm }) {
   return (
     <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl duration-300 w-64 h-96 mx-auto">
       
@@ -13,7 +13,7 @@ function Film({ pelicula, onDelete, onUpdate }) {
         />
         {/* Botón Delete */}
         <div className="absolute top-1 right-1">
-            <ButtonDelete onClick={() => onDelete(pelicula.id)} />
+            <ButtonDelete onClick={() => onDeleteFilm(pelicula.id)} />
         </div>
       </div>
 
@@ -25,7 +25,7 @@ function Film({ pelicula, onDelete, onUpdate }) {
           {pelicula.year}
         </p>
         {/* Botón Update */}
-        <ButtonUpdate onClick={() => onUpdate(pelicula.id)} />
+        <ButtonUpdate onClick={() => onUpdateFilm(pelicula.id)} />
       </div>
     </div>
   );

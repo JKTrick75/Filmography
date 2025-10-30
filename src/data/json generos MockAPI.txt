@@ -1,0 +1,30 @@
+[
+  {
+    "name": "ciencia ficción",
+    "id": "1"
+  },
+  {
+    "name": "aventura",
+    "id": "2"
+  },
+  {
+    "name": "histórica",
+    "id": "3"
+  },
+  {
+    "name": "comedia",
+    "id": "4"
+  },
+  {
+    "name": "terror",
+    "id": "5"
+  },
+  {
+    "name": "suspense",
+    "id": "6"
+  },
+  {
+    "name": "drama",
+    "id": "7"
+  }
+]
