@@ -2,9 +2,13 @@ import React from 'react'
 import ButtonSubmit from './ButtonSubmit';
 import SelectorGeneros from './SelectorGeneros';
 import { useForm } from '../hooks/useForm';
+import { useFilms } from '../context/FilmContext'; //Importamos FilmContext
 
-function FormNewFilm({ onCreateFilm, listaGeneros, onCreateGenero, onDeleteGenero }) {
-    //Usamos un custom hook para el State del formulario (useForm.js)
+function FormNewFilm() {
+    //Obtenemos los datos necesarios del FilmContext
+    const { generos, addPelicula, addGenero, removeGenero } = useFilms();
+
+    //Iniciamos State del formulario
     const [formData, handleChangeForm, resetForm, setFieldForm, handleToggleArrayField] = useForm({
         name: '',
         year: '',
@@ -16,16 +20,15 @@ function FormNewFilm({ onCreateFilm, listaGeneros, onCreateGenero, onDeleteGener
         //Evitamos que se recargue la página
         e.preventDefault();
 
-        //Validamos campos formulario
+        //Validación
         if (!formData.name || !formData.year || !formData.image) {
             alert('Por favor, completa todos los campos');
             return;
         }
 
-        //Llamamos a la función de crear película
-        onCreateFilm(formData);
-
-        //Limpiamos formulario
+        //Añadimos peli
+        addPelicula(formData);
+        //Reseteamos formulario
         resetForm();
     };
 
@@ -70,12 +73,13 @@ function FormNewFilm({ onCreateFilm, listaGeneros, onCreateGenero, onDeleteGener
                         />
                     </div>
 
+                    {/* Pasamos los datos y funciones que sacamos del contexto */}
                     <SelectorGeneros
-                        listaGeneros={listaGeneros}
+                        listaGeneros={generos}
                         selectedGeneros={formData.generos}
                         onToggle={(generoID) => handleToggleArrayField('generos', generoID)}
-                        onCreateGenero={onCreateGenero} //Pasamos la funcion de crear
-                        onDeleteGenero={onDeleteGenero} //Pasamos la funcion de editar
+                        onCreateGenero={addGenero} //Pasamos la funcion de crear
+                        onDeleteGenero={removeGenero} //Pasamos la funcion de editar
                     />
 
                     <div className="flex justify-center">

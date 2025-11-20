@@ -1,11 +1,16 @@
+// src/components/ModalEditFilm.jsx
 import React, { useEffect } from 'react';
 import ButtonSubmit from './ButtonSubmit';
 import ButtonCancel from './ButtonCancel';
 import SelectorGeneros from './SelectorGeneros';
 import { useForm } from '../hooks/useForm';
+import { useFilms } from '../context/FilmContext'; //Importamos FilmContext
 
-function ModalEditFilm({ pelicula, onSave, onClose, listaGeneros }) {
-    //Usamos un custom hook para el State del formulario (useForm.js)
+function ModalEditFilm({ pelicula, onSave, onClose }) {
+    //Obtenemos los datos necesarios del FilmContext
+    const { generos } = useFilms();
+
+    //Iniciamos State del formulario
     const [formData, handleChangeForm, resetForm, setFieldForm, handleToggleArrayField] = useForm({
         name: '',
         year: '',
@@ -28,7 +33,7 @@ function ModalEditFilm({ pelicula, onSave, onClose, listaGeneros }) {
         //Evitamos que se recargue la página
         e.preventDefault();
 
-        //Validamos campos formulario
+        //Validación
         if (!formData.name || !formData.year || !formData.image) {
             alert('Por favor, completa todos los campos');
             return;
@@ -80,8 +85,10 @@ function ModalEditFilm({ pelicula, onSave, onClose, listaGeneros }) {
                         />
                     </div>
 
+                    {/* Pasamos los datos que hemos sacado del contexto */}
                     <SelectorGeneros
-                        listaGeneros={listaGeneros}
+                        //En modo editar no pasamos las funciones de crear ni editar
+                        listaGeneros={generos} 
                         selectedGeneros={formData.generos}
                         onToggle={(generoID) => handleToggleArrayField('generos', generoID)}
                     />
@@ -104,4 +111,4 @@ function ModalEditFilm({ pelicula, onSave, onClose, listaGeneros }) {
     );
 }
 
-export default ModalEditFilm;
+export default ModalEditFilm
